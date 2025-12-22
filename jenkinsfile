@@ -1,0 +1,60 @@
+pipeline {
+    agent { label 'controller' }
+    environment {
+        IMAGE_NAME = "mindtreerepo"
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                echo "Checking out source code"
+                git 'https://github.com/sairam-swamy/maventomcatsnakes'
+                sh 'cp -r * /var/lib/jenkins/efs'
+            }
+        }
+
+        stage('Build Application (Java + Maven)') {
+            agent { label 'build' }
+
+            steps {
+
+                sh '''
+                    cd /home/jenkins/workspace
+                    mvn clean package
+                    cd target
+                    cp ROOT.war /home/jenkins/workspace && cd ..
+                    ls -al
+                '''
+            }
+        }
+
+        stage('Build & Push Docker Image') {
+            agent { label 'docker' }
+            steps {
+                sh '''
+                    cd /home/jenkins/workspace
+                    ls -al
+                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                    aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0a8o2u0
+                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} public.ecr.aws/v0a8o2u0/mindtree:latest
+                    docker push public.ecr.aws/v0a8o2u0/mindtree:latest
+                '''
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            agent { label 'docker' }
+
+            steps {
+                sh '''
+                    cd /home/jenkins/workspace
+                    sudo kubectl apply -f deployment.yml
+                    sudo kubectl apply -f svc.yml
+                '''
+            }
+        }
+    }
+
+}
