@@ -50,7 +50,7 @@
       <!--TODO: IMDB Integration -->
     </div>
     <div id="love" class="container snakes snake-lover">
-      <h1 class="cover-heading">Does it have snakes!?</h1>
+      <h1 class="cover-heading">hello keerthi how are you</h1>
       <p class="lead">A great resource for snake lovers.</p>
       <!--Intro -->
       <h2>Do you or a loved one love snakes?</h2>
@@ -81,6 +81,7 @@
     <script src="js/init.js"></script>
   </body>
 </html>
+
 
 
 
