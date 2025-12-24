@@ -17,6 +17,7 @@ spec:
         app: tomcat
     spec:
       containers:
-      - image: public.ecr.aws/i4i8t4u7/keerthi
-        name: keerthi
+      - image: public.ecr.aws/i4i8t4u7/mindtree
+        name: mindtree
+
 
