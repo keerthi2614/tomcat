@@ -1,29 +1,20 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tomcat
   labels:
     app: tomcat
+  name: tomcat
 spec:
   replicas: 10
   selector:
     matchLabels:
       app: tomcat
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 1
+  strategy: {}
   template:
     metadata:
       labels:
         app: tomcat
     spec:
       containers:
-        - name: mindtree
-          image: public.ecr.aws/i4i8t4u7/mindtree:latest  # placeholder; Jenkins will set the tag
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-``
+      - image: public.ecr.aws/i4i8t4u7/mindtree
+        name: mindtree
