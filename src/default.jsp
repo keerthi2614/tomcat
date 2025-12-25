@@ -53,7 +53,7 @@
       <h1 class="cover-heading">hello keerthi how are you</h1>
       <p class="lead">A great resource for snake lovers.</p>
       <!--Intro -->
-      <h2>Do you or a loved one love snakes?</h2>
+      <h2>welcome to devops training?</h2>
       <p>Snakes are a controversial topic. Some people love'em, some people just can't stand them. How do you get buy in a world where snakes are persecuted?</p>
       <h3 class="flyout toggle">Hate snakes? <a href="#" onclick="switchto('hate');return false;">Click Here</a></h3>
       <p>You would let a snake into your house, so why wouldn't you want one on your television screen? If you go out to see a movie, don't you want to know whether or not you can expect to be bombarded with images of amazing snakes?</p>
@@ -81,6 +81,7 @@
     <script src="js/init.js"></script>
   </body>
 </html>
+
 
 
 
